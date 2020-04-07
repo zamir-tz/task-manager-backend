@@ -1,6 +1,6 @@
 # task-manager-backend
 
-Basic nodejs task manager with auntification
+Basic nodejs task manager with authentication
 
 ## Getting Started
 
@@ -8,14 +8,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You need to have nodejs verion 10 or newer and local [mongodb-server](https://www.mongodb.com/download-center/community)
+You need to have nodejs verion 10 or newer and [mongodb](https://www.mongodb.com/)
 
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-After puling from repo run standart command
+After pulling from repo run standart command
 
 ```
 npm i
@@ -32,19 +30,20 @@ JWT_SECRET=<your encription key goes here>
 
 You can create a new user using http post method
 ```
-<url>/users
+hostname/users
 ```
 With request body
 ```
 "name": "<username>",
 "email": "<email>",
-"password": "<password>"
+"password": "<password>",
+"age": <age> //optional
 ```
-Additionaly you may include optional parameter "age"
+
 
 To login, send post request with email and password to
 ```
-<url>/users
+hostname/users
 ```
 To run additional requests authToken must be sent in request header.
 Authorization type is Bearer Token
@@ -54,12 +53,12 @@ Authorization type is Bearer Token
 #### POST requests
 To logout of current session and to terminate all sessions
 ```
-<url>/users/logout
-<url>/users/logoutAll
+hostname/users/logout
+hostname/users/logoutAll
 ```
 To upload user avatar
 ```
-<url>/users/me/avatar
+hostname/users/me/avatar
 ```
 with body
 ```
@@ -68,11 +67,11 @@ with body
 #### GET requests
 To get user information
 ```
-<url>/users/me
+hostname/users/me
 ```
 #### PATCH requests
 ```
-<url>/users/me
+hostname/users/me
 ```
 With body of updates for user
 ```
@@ -87,11 +86,11 @@ Only these updates are allowed
 
 Delete user and all tasks of this user
 ```
-<url>/users/me
+hostname/users/me
 ```
 Delete user avatar
 ```
-<url>/users/me/avatar
+hostname/users/me/avatar
 ```
 
 ### Tasks requests
@@ -104,7 +103,7 @@ In the body of this request might be two parameters "description" and "completed
 #### GET requests
 You can get tasks by id
 ```
-<url>/tasks/:id
+hostname/tasks/:id
 ```
 Additionaly you can get all tasks of the user
 ```
@@ -115,7 +114,7 @@ and sorting parameter ```sortBy=```.
 ```sortBy``` accepts only the following values ```createdAt```, ```updatedAt```, ```description``` and ```completed```. 
 With modifyer ```asc``` or ```desc```.
 ```
-<url>/tasks?limit=10&skip=5&sortBy=createdAt:desc
+hostname/tasks?limit=10&skip=5&sortBy=createdAt:desc
 ```
 #### PATCH requests
 ```
